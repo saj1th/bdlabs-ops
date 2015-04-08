@@ -21,9 +21,8 @@ var (
 		"6a1f03de38a6", "6aa330dcb7b4", "6dd0e529d859", "6e76d82047e7", "72439090a281", "76a57126b913", "795497bb97df", "79be94825a05"}
 	skuPrice    = []float64{2709.29, 3807.43, 1619.53, 9968.41, 9947.60, 9086.92, 6113.40, 8858.29, 1779.91, 7142.04, 8383.05, 9365.44, 729.28, 5225.00, 8010.68, 5338.60, 8327.74, 7543.48, 581.25, 1247.40, 9516.05, 3537.26, 6350.70, 6318.25, 314.23, 7257.00, 4245.51, 1855.51, 798.45, 1691.63, 521.44, 654.73, 9970.34, 5890.25, 565.37, 9153.11, 933.74, 2271.48, 2167.67, 5292.71, 1262.41, 4023.65, 9114.24, 2466.03, 1827.41, 2990.55, 7608.13, 1950.14, 1587.29, 8627.01}
 	skuCount    = 50
-	startDate   = time.Date(2011, time.December, 31, 0, 0, 0, 0, time.Local)
+	startDate   = time.Date(2012, time.January, 1, 0, 0, 0, 0, time.Local)
 	endDate     = time.Date(2014, time.December, 31, 0, 0, 0, 0, time.Local)
-	volGrowth   = 10
 	priceGrowth = 5.0
 	dateLayout  = "2006-01-02"
 	writer      *bufio.Writer
@@ -51,7 +50,7 @@ func main() {
 	bar := pb.StartNew(count)
 
 	// Open & defer close the data file
-	fileName := time.Now().Format("mockdata-20060102-15-04-05.csv")
+	fileName := time.Now().Format("mockdata.20060102.150405.csv")
 	outFile, err := os.Create(fileName)
 	if err != nil {
 		fmt.Println("Failed to open file.", err)
@@ -67,7 +66,7 @@ func main() {
 	writer = bufio.NewWriter(outFile)
 
 	// Initial value counting 10% Volume growth YOY
-	volumePerYear = int(float64(count) * 0.2512)
+	volumePerYear = int(float64(count) * 0.27)
 
 	checkYear := 0
 	for dt := startDate; endDate.Sub(dt) > 0; dt = dt.AddDate(0, 0, 1) {
@@ -88,7 +87,7 @@ func main() {
 			checkYear = dt.Year()
 		}
 		// Check if current day is Holiday
-		if (dt.Month() == time.November && dt.Day() > 20 && dt.Day() < 30) || (dt.Month() == time.December && dt.Day() > 20 && dt.Day() < 30) {
+		if (dt.Month() == time.November && dt.Day() > 15 && dt.Day() < 30) || (dt.Month() == time.December && dt.Day() > 15 && dt.Day() < 30) {
 			volumePerDay = volumePerHoliday
 		} else {
 			volumePerDay = volumePerNormalDay
