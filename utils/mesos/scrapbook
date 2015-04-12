@@ -1,13 +1,15 @@
 conf/spark-env.sh
------------------------
+==================
+
 export MESOS_NATIVE_LIBRARY=/usr/local/lib/libmesos.so
 export SPARK_EXECUTOR_URI=hdfs://x.x.x.x:8020/opt/spark-1.2.0-bin-hadoop2.4.tgz
 export MASTER=zk://x.x.x.x:2181,x.x.x.x:2181,x.x.x.x:2181/mesos
 -----------------------
 
 
+spark cmd
+===================
 ./bin/spark-shell --master mesos://x.x.x.x:5050
-
 
 ./bin/spark-submit \
 	--class org.bitbucket.saj1th.forecaster.Forecast \
@@ -18,3 +20,4 @@ export MASTER=zk://x.x.x.x:2181,x.x.x.x:2181,x.x.x.x:2181/mesos
 	--cassandrahost x.x.x.x  \
 	--modelspath  hdfs://x.x.x.x:8020/projects/forecaster/models \
 	hdfs://x.x.x.x:8020/projects/forecaster/data/traindata.csv
+
