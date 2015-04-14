@@ -1,0 +1,19 @@
+curl --data-binary @path/to/forecaster-incr-job/target/scala-2.10/forecaster-incr-job-assembly-0.5.2.jar 127.0.0.1:8090/jars/forecaster-incr-0.5.2
+
+curl -d "input.data =/opt/forecaster-incr/data/mockdata.20150414.024012.csv" '127.0.0.1:8090/jobs?appName=forecaster-incr-0.5.2&classPath=org.bitbucket.saj1th.forecasterincr.ForecastJob'
+
+curl -d "input.data =/path/to/data/mockdata.20150414.024012.csv " '127.0.0.1:8090/jobs?appName=forecaster-incr-0.5.2&classPath=org.bitbucket.saj1th.forecasterincr.ForecastJob'
+
+returns
+
+{
+  "status": "STARTED",
+  "result": {
+    "jobId": "d0f59a9a-244b-4a1a-a8c7-025786b6f9d0",
+    "context": "e03b63ea-org.bitbucket.saj1th.forecasterincr.ForecastJob"
+  }
+}
+
+
+curl 127.0.0.1:8090/jobs/b244f2eb-c809-4edd-b8f0-4a6bd960bff9
+
